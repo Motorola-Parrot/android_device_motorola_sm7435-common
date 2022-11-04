@@ -215,7 +215,8 @@ PRODUCT_COPY_FILES += \
 
 # Moto hardware
 PRODUCT_PACKAGES += \
-    MotoActions
+    MotoActions \
+    MotoCommonOverlay
 
 # Network
 PRODUCT_COPY_FILES += \
