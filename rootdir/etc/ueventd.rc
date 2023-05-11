@@ -533,5 +533,8 @@ subsystem mem_buf_vm
 # Motorola: Add for HIDRAW to access the glass usb device
 /dev/hidraw*             0660    uhid       uhid
 
+# socinfo
+/sys/devices/soc0                                       serial_number                   0000    root    root
+
 # NFC ST Driver permissions
 /dev/st21nfc              0660   nfc        nfc
