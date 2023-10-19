@@ -63,6 +63,8 @@ lib_fixups: lib_fixups_user_type = {
 
 
 blob_fixups: blob_fixups_user_type = {
+    'vendor/bin/hw/android.hardware.security.keymint-service-qti': blob_fixup()
+        .add_needed('android.hardware.security.rkp-V3-ndk.so'),
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
         .add_needed('libhidlbase_shim.so'),
 }  # fmt: skip
