@@ -82,7 +82,12 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/libqcodec2_core.so': blob_fixup()
         .add_needed('libcodec2_shim.so'),
     'vendor/lib64/sensors.moto.so': blob_fixup()
-          .add_needed('libbase_shim.so'),
+        .add_needed('libbase_shim.so'),
+    (
+       'vendor/etc/media_codecs_parrot_v0.xml',
+       'vendor/etc/media_codecs_ravelin.xml',
+    ): blob_fixup()
+        .regex_replace('.+media_codecs_(google_audio|google_telephony|vendor_audio).+\n', ''),
 } # fmt: skip
 
 module = ExtractUtilsModule(
