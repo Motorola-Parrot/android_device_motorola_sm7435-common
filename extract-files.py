@@ -87,7 +87,7 @@ blob_fixups: blob_fixups_user_type = {
        'vendor/etc/media_codecs_parrot_v0.xml',
        'vendor/etc/media_codecs_ravelin.xml',
     ): blob_fixup()
-        .regex_replace('.+media_codecs_(google_audio|google_telephony|vendor_audio).+\n', ''),
+        .regex_replace('.+media_codecs_(google_audio|google_c2|google_telephony|vendor_audio).+\n', ''),
 } # fmt: skip
 
 module = ExtractUtilsModule(
