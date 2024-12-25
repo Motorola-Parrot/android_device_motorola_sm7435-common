@@ -267,6 +267,9 @@ PRODUCT_PACKAGES += \
     FrameworksResTarget \
     WifiResTarget
 
+PRODUCT_PACKAGES += \
+    NcmTetheringOverlay
+
 # Mountpoints
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
