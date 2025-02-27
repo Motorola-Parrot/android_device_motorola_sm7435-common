@@ -11,6 +11,7 @@ ro.charger.enable_suspend=1
 
 # Display
 debug.sf.enable_hwc_vds=1
+sys.brightness.disable_gamma_conversion=true
 
 # CNE
 persist.vendor.cne.feature=1
