@@ -64,7 +64,7 @@ lib_fixups: lib_fixups_user_type = {
 
 blob_fixups: blob_fixups_user_type = {
     ('vendor/bin/hw/android.hardware.security.keymint-service-qti', 'vendor/lib64/libqtikeymint.so'): blob_fixup()
-        .add_needed('android.hardware.security.rkp-V1-ndk.so'),
+        .add_needed('android.hardware.security.rkp-V1-ndk.so')
         .replace_needed(
             'android.hardware.security.keymint-V1-ndk_platform.so',
             'android.hardware.security.keymint-V1-ndk.so',
@@ -76,11 +76,13 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed(
             'android.hardware.security.sharedsecret-V1-ndk_platform.so',
             'android.hardware.security.sharedsecret-V1-ndk.so',
-        )
+        ),
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
         .add_needed('libhidlbase_shim.so'),
     'vendor/lib64/libqcodec2_core.so': blob_fixup()
         .add_needed('libcodec2_shim.so'),
+    'vendor/lib64/sensors.moto.so': blob_fixup()
+          .add_needed('libbase_shim.so'),
 } # fmt: skip
 
 module = ExtractUtilsModule(
