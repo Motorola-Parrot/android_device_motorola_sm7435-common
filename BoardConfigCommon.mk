@@ -5,6 +5,7 @@
 #
 
 COMMON_PATH := device/motorola/sm7435-common
+KERNEL_PATH := device/motorola/$(TARGET_DEVICE)-kernel
 
 # A/B
 AB_OTA_PARTITIONS += \
@@ -41,6 +42,13 @@ TARGET_USES_QCOM_MM_AUDIO := true
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 
+# DTB/DTBO
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_KERNEL_SEPARATED_DTBO := true
+BOARD_USES_DT := true
+BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtbs
+BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbs/dtbo.img
+
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/configs/config.fs
 
@@ -56,6 +64,57 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
 DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
 DEVICE_MANIFEST_SKUS := parrot
 DEVICE_MANIFEST_PARROT_FILES += $(COMMON_PATH)/configs/vintf/manifest_parrot.xml
+
+# Kernel
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_IMAGE_NAME := Image
+BOARD_KERNEL_PAGESIZE := 4096
+BOARD_RAMDISK_USE_LZ4 := true
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_DTB_OFFSET := 0x01f00000
+BOARD_TAGS_OFFSET := 0x00000100
+
+BOARD_MKBOOTIMG_ARGS += \
+    --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --header_version $(BOARD_BOOT_HEADER_VERSION) --dtb_offset $(BOARD_DTB_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET)
+    
+BOARD_BOOTCONFIG := \
+    androidboot.hardware=qcom \
+    androidboot.memcg=1 \
+    androidboot.usbcontroller=a600000.dwc3 \
+    androidboot.selinux=permissive
+
+BOARD_KERNEL_CMDLINE := \
+    printk.devkmsg=on \
+    firmware_class.path=/data/vendor/param/firmware \
+    androidboot.selinux=permissive
+
+# Kernel prebuilt
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_SOURCE := $(KERNEL_PATH)/kernel-headers
+TARGET_KERNEL_VERSION := 5.10
+
+TARGET_NO_KERNEL_OVERRIDE := true
+
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/kernel
+
+PRODUCT_COPY_FILES += $(TARGET_PREBUILT_KERNEL):kernel
+
+# Kernel modules
+DLKM_MODULES_PATH := $(KERNEL_PATH)/vendor_dlkm
+RAMDISK_MODULES_PATH := $(KERNEL_PATH)/vendor_ramdisk
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DLKM_MODULES_PATH)/*.ko)
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(patsubst %,$(DLKM_MODULES_PATH)/%,$(shell cat $(DLKM_MODULES_PATH)/modules.load))
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DLKM_MODULES_PATH)/modules.blocklist
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(RAMDISK_MODULES_PATH)/*.ko)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(patsubst %,$(RAMDISK_MODULES_PATH)/%,$(shell cat $(RAMDISK_MODULES_PATH)/modules.load))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD  := $(patsubst %,$(RAMDISK_MODULES_PATH)/%,$(shell cat $(RAMDISK_MODULES_PATH)/modules.load.recovery))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(RAMDISK_MODULES_PATH)/modules.blocklist
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
@@ -75,7 +134,6 @@ BOARD_MOT_DP_GROUP_PARTITION_LIST := product system system_ext vendor vendor_dlk
 $(foreach p, $(call to-upper, $(BOARD_MOT_DP_GROUP_PARTITION_LIST)), \
     $(eval BOARD_$(p)IMAGE_FILE_SYSTEM_TYPE := ext4) \
     $(eval TARGET_COPY_OUT_$(p) := $(call to-lower, $(p))))
-
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
