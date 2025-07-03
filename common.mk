@@ -202,6 +202,10 @@ PRODUCT_PACKAGES += \
     FrameworksResTarget \
     WifiResTarget
 
+# Power
+PRODUCT_PACKAGES += \
+    android.hardware.power-service-qti
+
 # Secure Element
 ifeq ($(TARGET_USES_ST_NFC),true)
   PRODUCT_PACKAGES += \
