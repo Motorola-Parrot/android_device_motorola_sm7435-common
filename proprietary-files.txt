@@ -510,6 +510,20 @@ vendor/lib64/libvideotxr.so
 vendor/lib64/libvideoutils.so
 vendor/lib64/qti.video.utils.videobufferlayout.so
 
+# Media configs
+vendor/etc/media_profiles_V1_0.xml
+
+# Media configs (parrot)
+vendor/etc/media_codecs_performance_parrot_v0.xml
+vendor/etc/media_codecs_parrot_v0.xml
+vendor/etc/media_profiles_parrot_v0.xml
+
+# Media configs (ravelin)
+vendor/etc/media_codecs_performance_ravelin.xml
+vendor/etc/media_codecs_performance_ravelin.xml
+vendor/etc/media_codecs_ravelin.xml
+vendor/etc/media_profiles_ravelin.xml
+
 # ModemManager
 vendor/bin/modemManager
 vendor/etc/init/modemManager.rc
