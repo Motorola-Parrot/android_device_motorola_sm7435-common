@@ -58,6 +58,52 @@ DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
 DEVICE_MANIFEST_SKUS := parrot
 DEVICE_MANIFEST_PARROT_FILES += $(COMMON_PATH)/configs/vintf/manifest_parrot.xml
 
+# Kernel
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_KERNEL_CMDLINE += \
+    video=vfb:640x400,bpp=32,memsize=3072000 \
+    printk.devkmsg=on \
+    firmware_class.path=/vendor/firmware_mnt/image \
+    androidboot.selinux=permissive
+
+BOARD_BOOTCONFIG += \
+    androidboot.hardware=qcom \
+    androidboot.memcg=1 \
+    androidboot.usbcontroller=a600000.dwc3 \
+
+BOARD_KERNEL_IMAGE_NAME := Image
+BOARD_KERNEL_PAGESIZE := 4096
+BOARD_KERNEL_SEPARATED_DTBO := true
+BOARD_RAMDISK_USE_LZ4 := true
+TARGET_KERNEL_NO_GCC := true
+
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/vendor_ramdisk/*.ko)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(patsubst %,$(DEVICE_PATH)-kernel/vendor_ramdisk/%,$(shell cat $(DEVICE_PATH)-kernel/vendor_ramdisk/modules.load))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD  := $(patsubst %,$(DEVICE_PATH)-kernel/vendor_ramdisk/%,$(shell cat $(DEVICE_PATH)-kernel/vendor_ramdisk/modules.load.recovery))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)-kernel/vendor_ramdisk/modules.blocklist
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/vendor_dlkm/*.ko)
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(patsubst %,$(DEVICE_PATH)-kernel/vendor_dlkm/%,$(shell cat $(DEVICE_PATH)-kernel/vendor_dlkm/modules.load))
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)-kernel/vendor_dlkm/modules.blocklist
+
+# Prebuilt Kernel
+INLINE_KERNEL_BUILDING := true
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_NO_KERNEL_OVERRIDE := true
+TARGET_NO_KERNEL := false
+BOARD_KERNEL_BINARIES := kernel
+TARGET_KERNEL_VERSION := 5.10
+TARGET_KERNEL_SOURCE := $(DEVICE_PATH)-kernel/kernel-headers
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)-kernel/dtb.img
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)-kernel/dtbo.img
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)-kernel/kernel
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)-kernel/dtb.img:$(TARGET_COPY_OUT)/dtb.img \
+    $(DEVICE_PATH)-kernel/kernel:kernel
+
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
 
