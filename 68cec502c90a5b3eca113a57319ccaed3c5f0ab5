@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edfa69d8_fb273c1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2025-08-10T20:04:49Z",
+      "side": 1,
+      "message": "Test it on your cuscoi.",
+      "revId": "68cec502c90a5b3eca113a57319ccaed3c5f0ab5",
+      "serverId": "10b47cd0-ef45-46be-b9f3-8729e8c6cfd0"
+    }
+  ]
+}
