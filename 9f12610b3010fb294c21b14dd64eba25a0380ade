@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d90411e_5be3692f",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2025-08-10T13:20:03Z",
+      "side": 1,
+      "message": "Maybe decommonize firmware_class.path?\nAnd isn\u0027t /vendor/firmware_mnt/image a correct value?",
+      "revId": "9f12610b3010fb294c21b14dd64eba25a0380ade",
+      "serverId": "10b47cd0-ef45-46be-b9f3-8729e8c6cfd0"
+    }
+  ]
+}
