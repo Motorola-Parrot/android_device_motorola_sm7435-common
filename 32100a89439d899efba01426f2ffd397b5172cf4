@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b389d91_08b0ffc1",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2025-08-10T12:06:22Z",
+      "side": 1,
+      "message": "Please make line breaks via `\\` for one flag, don\u0027t spam.",
+      "revId": "32100a89439d899efba01426f2ffd397b5172cf4",
+      "serverId": "10b47cd0-ef45-46be-b9f3-8729e8c6cfd0"
+    }
+  ]
+}
