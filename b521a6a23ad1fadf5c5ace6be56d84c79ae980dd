@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fea5da3_cc83c311",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2025-08-11T08:49:53Z",
+      "side": 1,
+      "message": "Looks fine for me, grant V+1 when you will verify it.",
+      "revId": "b521a6a23ad1fadf5c5ace6be56d84c79ae980dd",
+      "serverId": "10b47cd0-ef45-46be-b9f3-8729e8c6cfd0"
+    }
+  ]
+}
