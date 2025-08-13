@@ -306,6 +306,9 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors-service.multihal \
     sensors.moto_sm7435
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
+
 $(foreach sku, parrot ravelin, \
     $(eval PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_$(sku)/android.hardware.sensor.accelerometer.xml \
