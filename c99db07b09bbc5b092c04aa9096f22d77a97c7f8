@@ -16,6 +16,23 @@
       "message": "Lost authorship",
       "revId": "c99db07b09bbc5b092c04aa9096f22d77a97c7f8",
       "serverId": "10b47cd0-ef45-46be-b9f3-8729e8c6cfd0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9939af8_f4630f67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2025-08-13T12:10:42Z",
+      "side": 1,
+      "message": "https://github.com/LineageOS/android_device_motorola_sm8475-common/commit/d9a6f4fb8dcdaffd48a09f078afe59d742917c37\n\nhttps://github.com/search?q\u003dorg%3ALineageOS+Ic730e45b25c87fb5b9d8d301bf44bd7176a0576c\u0026type\u003dcommits",
+      "revId": "c99db07b09bbc5b092c04aa9096f22d77a97c7f8",
+      "serverId": "10b47cd0-ef45-46be-b9f3-8729e8c6cfd0"
     }
   ]
 }
