@@ -40,8 +40,10 @@ media.stagefright.enable-scan=true
 media.stagefright.thumbnail.prefer_hw_codecs=true
 ro.media.recorder-max-base-layer-fps=60
 
+# Netmgrd
+persist.vendor.data.mode=concurrent
+
 # Radio
-persist.vendor.radio.atfwd.start=true
 ril.subscription.types=NV,RUIM
 ro.telephony.default_network=33,33
 telephony.lteOnCdmaDevice=1
