@@ -327,6 +327,9 @@ subsystem mem_buf_vm
 /dev/nq-nci               0660    nfc         nfc
 /dev/assd                 0660    nfc         nfc
 
+# eSE permissions
+/dev/st54spi_gpio         0660   system     system
+
 # UIO devices
 /dev/uio0                 0660   system     system
 /dev/uio1                 0660   system     system
@@ -351,6 +354,9 @@ subsystem mem_buf_vm
 
 # Goodix fingerprint device
 /dev/goodix_fp            0660   system     system
+
+# Focal fingerprint device
+/dev/focaltech_fp         0660   system     system
 
 # EgisTech fingerprint device
 /dev/esfp0                0660   system     system

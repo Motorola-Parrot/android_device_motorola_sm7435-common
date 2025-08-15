@@ -1,4 +1,3 @@
-
 # Copyright (c) 2019-2021, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -29,7 +28,6 @@
 #
 
 import /vendor/etc/init/hw/init.qti.kernel.rc
-
 import /vendor/etc/init/hw/init.mmi.rc
 
 on early-init
@@ -62,7 +60,6 @@ on post-fs
 
 on late-fs
     mount_all --late
-    chown system system /sys/class/power_supply/battery/device/force_charging_disable
 
 on post-fs-data
     mkdir /vendor/data/tombstones 0771 system system
@@ -75,14 +72,6 @@ on early-boot
 
 on boot
     write /dev/cpuset/audio-app/cpus 1-2
-    # Add a cpuset for the camera daemon
-    # We want all cores for camera
-    mkdir /dev/cpuset/camera-daemon
-    write /dev/cpuset/camera-daemon/cpus 0-7
-    write /dev/cpuset/camera-daemon/mems 0
-    chown cameraserver cameraserver /dev/cpuset/camera-daemon
-    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
-    chmod 0660 /dev/cpuset/camera-daemon/tasks
     chown system /sys/devices/platform/soc/990000.i2c/i2c-0/0-0038/trusted_touch_enable
     chmod 0660 /sys/devices/platform/soc/990000.i2c/i2c-0/0-0038/trusted_touch_enable
     chown system /sys/devices/platform/soc/990000.spi/spi_master/spi0/spi0.0/trusted_touch_enable
@@ -101,13 +90,7 @@ on init && property:ro.boot.mode=charger
 on charger
     start vendor.power_off_alarm
     setprop sys.usb.controller a600000.dwc3
-#    wait /sys/class/udc/${sys.usb.controller}
-
-#service vendor.lowi /vendor/bin/sscrpcd
-#   class core
-#   user system
-#   group system wakelock
-#   capabilities BLOCK_SUSPEND
+    setprop sys.usb.configfs 1
 
 #pd-mapper
 service vendor.pd_mapper /vendor/bin/pd-mapper
@@ -127,15 +110,6 @@ service vendor.per_proxy /vendor/bin/pm-proxy
     user system
     group system
     disabled
-
-#service vendor.mdm_helper /vendor/bin/mdm_helper
-#    class core
-#    group system wakelock
-#    disabled
-
-service vendor.mdm_launcher /vendor/bin/sh /vendor/bin/init.mdm.sh
-    class core
-    oneshot
 
 on property:init.svc.vendor.per_mgr=running
     start vendor.per_proxy
