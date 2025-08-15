@@ -163,7 +163,7 @@ case "$platformid" in
 	"537" | "583" | "613" | "631" | "633" | "634" | "638" | "663")
 		/vendor/bin/sh /vendor/bin/init.kernel.post_boot-parrot.sh
 		;;
-	"568" | "602" | "581" | "582")
+	"568" | "602" | "581" | "582" | "653" | "654")
 		/vendor/bin/sh /vendor/bin/init.kernel.post_boot-ravelin.sh
 		;;
 	*)
